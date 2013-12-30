@@ -1,0 +1,44 @@
+Edward Schembor
+Project 3 - Project Design
+
+Globals:
+	Steps = Number of next steps
+	Percent = Chance of creating an upper level for an elements
+	Levels = Number of levels in the super list
+	Sentinals = Array of sentinal elements
+
+Element Structure:
+	int key
+	pointer right
+	pointer down
+	pointer to the data
+	
+
+repository_init Method:
+We start by setting two global variables (Count and Levels) to zero and Percent to the parameter p. We then set our Start Element's next and data pointers to NULL and their keys equal to zero so that it is always the smallest key in our the data structure and their down pointer's to the sentinal below them (except for the first sentinal, whose down pointer we initialize to NULL). Finally, we use our srnad method with a seed of 0.
+
+repository_insert Method:
+We start by creating a static array of pointer elements which we will use to keep track of the main pointer's motion as it traverses our list. Each pointer in this array is set to point to a sentinal at first. Then, as our pointer moves down, these pointers will move to the location at which the main pointer moved down. We begin at our first non-empty level (which we know from the Levels global) and check if the next element's value is greater than the key we are trying to insert. If it is, we move our main pointer down. If it isn't we move right and make sure that the element we are now on doesn't have the value we are inserting. Once we arrive at the new key's place in the bottom row, we insert it using another pointer, called "tempPointer" and create a data element for it to point to. Then, we "roll" to check if we need to add another level on top of it. To add this top level, we use the same insert code as we did before, again using a Ptemp pointer to insert it and having its data pointer point to the data element we previously created. We also add 1 to a variable named "counter" to keep track of how many levels this element is in. We do this until the "roll" tells us that we no longer need to add another level. If at this time counter is greater than our global variable Levels, we set Levels equal to counter.
+
+repository_delete Method:
+We again start at our Start_Pointer and traverse the list until we find an element with our key, in a method similar to that used
+in the repository_insert method: we move right if the next element's key is less than our deleting key and down if the next key if greater than the key we are trying to delete. Once we find an instance of this key, we delete it, using another pointer again called "tempPointer" to assist. We move down and repeat this until we find the instance of this key on the bottom floor and delete it. When we do this, we also delete the data element that was created for this key. If deleting this element creates an instance where a level is deleted (which we can check for by seeing if the element we are deleting is equal to its sentinal's next element and it's next element is NULL), then we subtract 1 from the global variable Levels.
+
+repository_get Method:
+Uses the same general method used in the repository_delete and repository_insert methods when they are traversing the list. We start
+at our Start_Pointer. We move right if the next element's key is less than the key we are trying to find, else we move 
+down a level using our current element's down pointer. Then, we check if the element we are on has a key equal to the key we are trying to find. If it is, we return 1. Else, we continue this process until we reach the end of the list (Where both the down pointer and right pointers are NULL).
+
+repository_print Method:
+For all cases, we print out the number of records in our list (by having a pointer traverse the bottom level of the list), the number of records in each level (again by having a pointer traverse each level),  the current number of steps taken (from our Steps global variable), and the number of levels in the list (from our Levels global variable).
+
+When print_elements == 1:
+We have a pointer traverse the bottom level of the super list, printing each element until the pointer's next value is NULL.
+
+When print_elements == 2:
+We have 2 pointers. One on the bottome level of the list and one on the nth level of the list, where n starts equal to the Levels global variable. They both begin at their respective levels sentinal node. If they're next elements are equal, then the element is printed. If not, a space is printed and the bottom level's pointer moves right. This continues until the bottom pointer's next element is NULL. When this happens, n is decreased by one and the process is repeated until n = 0.
+
+
+Changes to Project3.c:
+The most prominent change to project3.c was the creation of the option to input command line parameters. Now, the program does not ask for input, but can take it through the command line. A method called usage was created to check for command line parameters and change certain variables in the program based on them. The max range, number of operations, seed, and probability percentage can now all be changed from the command line. 
+

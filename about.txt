@@ -1,0 +1,5 @@
+This repsository is for a "2d Linked List" data structure. Essentially, each
+time an element is added, there is a chanve that another identical element will
+be placed "on top of it" with pointers. This allows for quicker operations.
+In theory, on each level, every other element will have an object above it.
+See results.txt for more in depth explanation of efficiency.

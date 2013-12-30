@@ -1,0 +1,15 @@
+Project 3
+Edward Schembor
+Results.txt
+
+Part 2:
+
+The average number of steps for each case is significantly lower than those in project 2. This is because the "leveling" in project 3 allow for much faster searching.
+
+In project 3, for any set of range "n", we can expect there to be log(n) levels. Also, since we are using p = 50, then on average, for each level, every other element will a have a "copy" on an uppper level. Therefore, on average, the total amount of steps needed to complete a search will be 2log(n) since on average the program needs to move down once and move right once.
+
+Part 3:
+
+On average, p = 50 is the most efficient case. This is because for it, on avergae, every other element on any given level will have another copy of it on the next level. 
+In the case of p = 25, on average, every fourth element will have a copy on a higher level. So, on average, the program will need to move down once and right 3 times on each level. So, for p = 25, the expected steps will be 4log(n).
+In the case of p = 75, on average, 3 out of every 4 elements will have a copy on a higher level. So, on average, the program will need to move down 3 times and move right once on each level. So, for p = 25, the expected steps is 4log(n).
